@@ -64,12 +64,12 @@
             .replace(/[\s\-–—_]+/g, '')
             .trim();
 
-        const match = text.match(/^([က-အဧဩဪ]+)(\d{1,5})$/);
+        const match = text.match(/^([\u1000-\u109F]+)(\d{5})$/);
         if (!match) return null;
 
         return {
             prefix: match[1],
-            number: match[2].padStart(5, '0')
+            number: match[2]
         };
     }
 
@@ -83,39 +83,68 @@
       1 = အက္ခရာ + ရှေ့ဂဏန်း ၁ လုံးတူရမည်
     */
     const winningData = [
-        { prize: "ကျပ်သိန်း (၅၀၀) ဆု", prefix:"ည", number:"၅၅၅၆၀", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၂၀၀) ဆု", prefix:"ပ", number:"၄၄၃၃၆", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၂၀၀) ဆု", prefix:"ဈ", number:"၈၁၂၂၉", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၁၀၀) ဆု", prefix:"ယ", number:"၉၃၈၈၃", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၁၀၀) ဆု", prefix:"ရ", number:"၆၆၇၆၃", matchLength:5 },
+        // ဆုတစ်ဆုချင်း — ကျပ်သိန်း (၅၀၀)
+        { prize:"ကျပ်သိန်း (၅၀၀) ဆု", prefix:"န", number:"၅၆၂၂၆", matchLength:5 },
 
-        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"ဇ", number:"၁၂၈၈၄", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"ဒ", number:"၁၅၃၃၈", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"ဆ", number:"၁၈၂၄၁", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"ဂ", number:"၂၄၈၄၉", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"ဒ", number:"၃၄၄၇၃", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"လ", number:"၈၅၃၂၈", matchLength:5 },
+        // ကျပ်သိန်း (၂၀၀)
+        { prize:"ကျပ်သိန်း (၂၀၀) ဆု", prefix:"ဘ", number:"၄၂၁၇၃", matchLength:5 },
+        { prize:"ကျပ်သိန်း (၂၀၀) ဆု", prefix:"ထ", number:"၅၇၁၉၂", matchLength:5 },
 
-        { prize: "ကျပ်သိန်း (၂၀) ဆု", prefix:"ဘ", number:"၂၀၁၁၃", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၂၀) ဆု", prefix:"ဘ", number:"၂၅၁၅၆", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၂၀) ဆု", prefix:"ယ", number:"၃၆၉၄၅", matchLength:5 },
+        // ကျပ်သိန်း (၁၀၀)
+        { prize:"ကျပ်သိန်း (၁၀၀) ဆု", prefix:"မ", number:"၁၀၄၆၉", matchLength:5 },
+        { prize:"ကျပ်သိန်း (၁၀၀) ဆု", prefix:"ဗ", number:"၃၁၃၃၁", matchLength:5 },
+        { prize:"ကျပ်သိန်း (၁၀၀) ဆု", prefix:"ပ", number:"၅၂၉၀၅", matchLength:5 },
 
-        { prize: "ကျပ်သိန်း (၁၀) ဆု", prefix:"ရ", number:"၂၄၄၆၇", matchLength:5 },
-        { prize: "ကျပ်သိန်း (၁၀) ဆု", prefix:"ခ", number:"၂၉၀၅၃", matchLength:5 },
+        // ကျပ်သိန်း (၅၀)
+        { prize:"ကျပ်သိန်း (၅၀) ဆု", prefix:"ယ", number:"၆၅၆၆၉", matchLength:5 },
+        { prize:"ကျပ်သိန်း (၅၀) ဆု", prefix:"ဝ", number:"၆၅၆၅၃", matchLength:5 },
+        { prize:"ကျပ်သိန်း (၅၀) ဆု", prefix:"ယ", number:"၇၇၆၅၉", matchLength:5 },
+        { prize:"ကျပ်သိန်း (၅၀) ဆု", prefix:"သ", number:"၈၈၉၇၉", matchLength:5 },
 
-        // ဝေဝေဆာဆာဆု
-        { prize: "ကျပ် (၂) သိန်း ဆု", prefix:"ပ", number:"၃၂၇၀၃", matchLength:5 },
-        { prize: "ကျပ် (၂) သိန်း ဆု", prefix:"ဈ", number:"၅၁၁၀၈", matchLength:5 },
+        // ကျပ်သိန်း (၂၀)
+        { prize:"ကျပ်သိန်း (၂၀) ဆု", prefix:"တ", number:"၂၃၉၅၅", matchLength:5 },
+        { prize:"ကျပ်သိန်း (၂၀) ဆု", prefix:"ယ", number:"၃၁၈၁၆", matchLength:5 },
+        { prize:"ကျပ်သိန်း (၂၀) ဆု", prefix:"ပ", number:"၃၄၀၆၇", matchLength:5 },
+        { prize:"ကျပ်သိန်း (၂၀) ဆု", prefix:"ဝ", number:"၄၁၁၁၀", matchLength:5 },
+        { prize:"ကျပ်သိန်း (၂၀) ဆု", prefix:"င", number:"၆၂၅၁၁", matchLength:5 },
 
-        { prize: "ကျပ် (၁) သိန်း ဆု", prefix:"ပ", number:"၅၀၇", matchLength:3 },
-        { prize: "ကျပ် (၁) သိန်း ဆု", prefix:"ဆ", number:"၆၄၉", matchLength:3 },
+        // ကျပ် (၁၀) သိန်း
+        { prize:"ကျပ် (၁၀) သိန်း ဆု", prefix:"ဃ", number:"၆၇၆၆၁", matchLength:5 },
+        { prize:"ကျပ် (၁၀) သိန်း ဆု", prefix:"ဂ", number:"၂၅၄၂၆", matchLength:5 },
+        { prize:"ကျပ် (၁၀) သိန်း ဆု", prefix:"ဆ", number:"၃၂၅၂၇", matchLength:5 },
+        { prize:"ကျပ် (၁၀) သိန်း ဆု", prefix:"ဝ", number:"၆၁၆၁၅", matchLength:5 },
+        { prize:"ကျပ် (၁၀) သိန်း ဆု", prefix:"သ", number:"၉၆၄၃၀", matchLength:5 },
 
-        { prize: "ကျပ် (၅) သောင်း ဆု", prefix:"ဗ", number:"၁၇", matchLength:2 },
-        { prize: "ကျပ် (၅) သောင်း ဆု", prefix:"ထ", number:"၂၈", matchLength:2 },
+        // ဝေဝေဆာဆာပဒေသာ — ကျပ် (၂) သိန်း
+        { prize:"ကျပ် (၂) သိန်း ဆု", prefix:"ထ", number:"၁၆၄၉", matchLength:4 },
+        { prize:"ကျပ် (၂) သိန်း ဆု", prefix:"ခ", number:"၂၉၁၄", matchLength:4 },
+        { prize:"ကျပ် (၂) သိန်း ဆု", prefix:"ည", number:"၄၇၆၃", matchLength:4 },
+        { prize:"ကျပ် (၂) သိန်း ဆု", prefix:"ဒ", number:"၅၉၀၁", matchLength:4 },
+        { prize:"ကျပ် (၂) သိန်း ဆု", prefix:"ဘ", number:"၆၉၁၄", matchLength:4 },
 
-        { prize: "ကျပ် (၁) သောင်း ဆု", prefix:"ဇ", number:"၁", matchLength:1 },
-        { prize: "ကျပ် (၁) သောင်း ဆု", prefix:"က", number:"၂", matchLength:1 },
-        { prize: "ကျပ် (၁) သောင်း ဆု", prefix:"အ", number:"၄", matchLength:1 }
+        // ကျပ် (၁) သိန်း — ရှေ့ ၃ လုံး
+        { prize:"ကျပ် (၁) သိန်း ဆု", prefix:"ပ", number:"၂၅၃", matchLength:3 },
+        { prize:"ကျပ် (၁) သိန်း ဆု", prefix:"ဝ", number:"၇၁၆", matchLength:3 },
+        { prize:"ကျပ် (၁) သိန်း ဆု", prefix:"င", number:"၃၃၁", matchLength:3 },
+        { prize:"ကျပ် (၁) သိန်း ဆု", prefix:"င", number:"၃၉၄", matchLength:3 },
+        { prize:"ကျပ် (၁) သိန်း ဆု", prefix:"ဗ", number:"၃၉၉", matchLength:3 },
+
+        // ကျပ် (၅) သောင်း — ရှေ့ ၃ လုံး
+        { prize:"ကျပ် (၅) သောင်း ဆု", prefix:"ဝ", number:"၄၈၁", matchLength:3 },
+        { prize:"ကျပ် (၅) သောင်း ဆု", prefix:"ဝ", number:"၆၃၀", matchLength:3 },
+        { prize:"ကျပ် (၅) သောင်း ဆု", prefix:"ရ", number:"၇၅၆", matchLength:3 },
+        { prize:"ကျပ် (၅) သောင်း ဆု", prefix:"န", number:"၈၃၂", matchLength:3 },
+        { prize:"ကျပ် (၅) သောင်း ဆု", prefix:"အ", number:"၉၂၅", matchLength:3 },
+        { prize:"ကျပ် (၅) သောင်း ဆု", prefix:"ဘ", number:"၉၅၂", matchLength:3 },
+
+        // ကျပ် (၁) သောင်း — ရှေ့ ၂ လုံး
+        { prize:"ကျပ် (၁) သောင်း ဆု", prefix:"ဝ", number:"၁၆", matchLength:2 },
+        { prize:"ကျပ် (၁) သောင်း ဆု", prefix:"ဇ", number:"၁၉", matchLength:2 },
+        { prize:"ကျပ် (၁) သောင်း ဆု", prefix:"ဇ", number:"၂၉", matchLength:2 },
+        { prize:"ကျပ် (၁) သောင်း ဆု", prefix:"တ", number:"၃၂", matchLength:2 },
+        { prize:"ကျပ် (၁) သောင်း ဆု", prefix:"ဒ", number:"၅၅", matchLength:2 },
+        { prize:"ကျပ် (၁) သောင်း ဆု", prefix:"ဝ", number:"၉၈", matchLength:2 },
+        { prize:"ကျပ် (၁) သောင်း ဆု", prefix:"ပ", number:"၉၉", matchLength:2 }
     ];
 
     const priority = {5: 4, 3: 3, 2: 2, 1: 1};
@@ -136,8 +165,7 @@
             if (item.prefix !== ticket.prefix) return false;
 
             const winNumber = normalizeDigits(item.number);
-            return ticket.number.slice(0, item.matchLength) ===
-                   winNumber.padStart(item.matchLength, '0').slice(0, item.matchLength);
+            return ticket.number.slice(0, item.matchLength) === winNumber.slice(0, item.matchLength);
         }).sort((a,b) => priority[b.matchLength] - priority[a.matchLength]);
 
         resultBox.style.display = "block";
