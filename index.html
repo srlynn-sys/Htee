@@ -3,219 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ထီပေါက်စဉ် စစ်ဆေးရန်</title>
+    <title>ထီလက်မှတ် ပေါက်/မပေါက် စစ်ဆေးရန်</title>
     <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Pyidaungsu', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { box-sizing: border-box; font-family: 'Pyidaungsu','Segoe UI',Tahoma,sans-serif; }
         body {
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+            background: linear-gradient(135deg,#fff7ed,#f8fafc);
+            display:flex; justify-content:center; align-items:center;
+            min-height:100vh; margin:0; padding:20px;
         }
         .card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 450px;
-            padding: 25px;
-            text-align: center;
+            background:#fff; width:100%; max-width:500px; padding:26px;
+            border-radius:18px; box-shadow:0 8px 30px rgba(0,0,0,.10);
         }
-        h2 {
-            color: #d97706;
-            margin-top: 0;
-            margin-bottom: 5px;
-            font-size: 22px;
+        h2 { margin:0 0 6px; text-align:center; color:#b45309; font-size:23px; }
+        .subtitle { text-align:center; color:#6b7280; font-size:14px; margin-bottom:22px; }
+        label { display:block; font-weight:700; color:#374151; margin-bottom:8px; }
+        input {
+            width:100%; padding:14px 15px; border:1.5px solid #d1d5db;
+            border-radius:10px; font-size:18px; outline:none; text-align:center;
         }
-        .subtitle {
-            color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        select, input[type="text"] {
-            padding: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-        }
-        select {
-            width: 35%;
-            background-color: #fff;
-        }
-        input[type="text"] {
-            width: 65%;
-        }
+        input:focus { border-color:#f59e0b; box-shadow:0 0 0 3px rgba(245,158,11,.15); }
+        .hint { color:#6b7280; font-size:13px; margin:8px 0 16px; text-align:center; }
         button {
-            width: 100%;
-            background-color: #d97706;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
+            width:100%; background:#d97706; color:white; border:0; padding:13px;
+            border-radius:10px; font-size:17px; font-weight:700; cursor:pointer;
         }
-        button:hover {
-            background-color: #b45309;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
-            font-weight: bold;
-        }
-        .win {
-            background-color: #dcfce7;
-            color: #15803d;
-            border: 1px solid #86efac;
-        }
-        .lose {
-            background-color: #fee2e2;
-            color: #b91c1c;
-            border: 1px solid #fca5a5;
-        }
+        button:hover { background:#b45309; }
+        .result { margin-top:18px; padding:16px; border-radius:12px; display:none; line-height:1.7; }
+        .win { background:#ecfdf5; color:#166534; border:1px solid #86efac; }
+        .lose { background:#fef2f2; color:#991b1b; border:1px solid #fca5a5; }
+        .small { font-size:13px; font-weight:400; margin-top:5px; }
+        .prize { font-size:20px; }
     </style>
 </head>
 <body>
-
 <div class="card">
-    <h2>(၄၄) ကြိမ်မြောက် 5 Digits ထီပေါက်စဉ်</h2>
-    <div class="subtitle">၁၆-၈-၂၀၂၄ (တနင်္ဂနွေနေ့)</div>
-    
-    <div class="input-group">
-        <select id="prefix">
-            <option value="က">က</option>
-            <option value="ခ">ခ</option>
-            <option value="ဂ">ဂ</option>
-            <option value="ဃ">ဃ</option>
-            <option value="င">င</option>
-            <option value="စ">စ</option>
-            <option value="ဆ">ဆ</option>
-            <option value="ဇ">ဇ</option>
-            <option value="ဈ">ဈ</option>
-            <option value="ည">ည</option>
-            <option value="ဋ">ဋ</option>
-            <option value="ဌ">ဌ</option>
-            <option value="ဍ">ဍ</option>
-            <option value="ဎ">ဎ</option>
-            <option value="ဏ">ဏ</option>
-            <option value="တ">တ</option>
-            <option value="ထ">ထ</option>
-            <option value="ဒ">ဒ</option>
-            <option value="ဓ">ဓ</option>
-            <option value="န">န</option>
-            <option value="ပ">ပ</option>
-            <option value="ဖ">ဖ</option>
-            <option value="ဗ">ဗ</option>
-            <option value="ဘ">ဘ</option>
-            <option value="မ">မ</option>
-            <option value="ယ">ယ</option>
-            <option value="ရ">ရ</option>
-            <option value="လ">လ</option>
-            <option value="ဝ">ဝ</option>
-            <option value="သ">သ</option>
-            <option value="ဟ">ဟ</option>
-            <option value="ဠ">ဠ</option>
-            <option value="အ">အ</option>
-        </select>
-        <input type="text" id="ticketNumber" placeholder="ထီနံပါတ် (ဥပမာ - ၅၅၅၆၀)" maxlength="5">
-    </div>
+    <h2>ထီလက်မှတ် ပေါက် / မပေါက် စစ်ဆေးရန်</h2>
+    <div class="subtitle">ထီလက်မှတ်နံပါတ်ကို တစ်ခါတည်း ရိုက်ထည့်ပါ</div>
 
-    <button onclick="checkLottery()">ထီပေါက်စဉ် စစ်ဆေးမည်</button>
+    <label for="ticket">ထီလက်မှတ်နံပါတ်</label>
+    <input id="ticket" type="text" inputmode="text" maxlength="20"
+           placeholder="ဥပမာ - က ၁၂၃၄၅"
+           onkeydown="if(event.key==='Enter') checkLottery()">
+    <div class="hint">ဥပမာ — က ၁၂၃၄၅ / က-12345 / က12345</div>
 
+    <button onclick="checkLottery()">ပေါက် / မပေါက် စစ်ဆေးမည်</button>
     <div id="resultBox" class="result"></div>
 </div>
 
 <script>
-    // မြန်မာဂဏန်းမှ အင်္ဂလိပ်ဂဏန်းသို့ ပြောင်းလဲရန်
-    function convertBurmeseToEnglishNums(str) {
-        const burmeseDigits = ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'];
-        return str.replace(/[၀-၉]/g, function(w) {
-            return burmeseDigits.indexOf(w);
-        });
+    // မြန်မာဂဏန်း ↔ အင်္ဂလိပ်ဂဏန်း ပြောင်းခြင်း
+    function normalizeDigits(str) {
+        const map = {'၀':'0','၁':'1','၂':'2','၃':'3','၄':'4','၅':'5','၆':'6','၇':'7','၈':'8','၉':'9'};
+        return String(str).replace(/[၀-၉]/g, ch => map[ch]);
     }
 
-    // ပုံပါ ထီပေါက်စဉ် ဒေတာများ (အက္ခရာ + နံပါတ်)
-    const winningData = [
-        // ဆုတစ်ဆုချင်း
-        { prize: "ကျပ်သိန်း(၅၀၀) ဆု", prefix: "ည", number: "၅၅၅၆၀" },
-        { prize: "ကျပ်သိန်း(၂၀၀) ဆု", prefix: "ပ", number: "၄၄၃၃၆" },
-        { prize: "ကျပ်သိန်း(၂၀၀) ဆု", prefix: "ဈ", number: "၈၁၂၂၉" },
-        { prize: "ကျပ်သိန်း(၁၀၀) ဆု", prefix: "ယ", number: "၉၃၈၈၃" },
-        { prize: "ကျပ်သိန်း(၁၀၀) ဆု", prefix: "ရ", number: "၆၆၇၆၃" },
-        { prize: "ကျပ်သိန်း(၅၀) ဆု", prefix: "ဇ", number: "၁၂၈၈၄" },
-        { prize: "ကျပ်သိန်း(၅၀) ဆု", prefix: "ဒ", number: "၁၅၃၃၈" },
-        { prize: "ကျပ်သိန်း(၅၀) ဆု", prefix: "ဆ", number: "၁၈၂၄၁" },
-        { prize: "ကျပ်သိန်း(၅၀) ဆု", prefix: "ဂ", number: "၂၄၈၄၉" },
-        { prize: "ကျပ်သိန်း(၅၀) ဆု", prefix: "ဒ", number: "၃၄၄၇၃" },
-        { prize: "ကျပ်သိန်း(၅၀) ဆု", prefix: "လ", number: "၈၅၃၂၈" },
-        { prize: "ကျပ်သိန်း(၂၀) ဆု", prefix: "ဘ", number: "၂၀၁၁၃" },
-        { prize: "ကျပ်သိန်း(၂၀) ဆု", prefix: "ဘ", number: "၂၅၁၅၆" },
-        { prize: "ကျပ်သိန်း(၂၀) ဆု", prefix: "ယ", number: "၃၆၉၄၅" },
-        { prize: "ကျပ်သိန်း(၁၀) ဆု", prefix: "ရ", number: "၂၄၄၆၇" },
-        { prize: "ကျပ်သိန်း(၁၀) ဆု", prefix: "ခ", number: "၂၉၀၅၃" },
+    // ထီလက်မှတ်ကို "အက္ခရာ + ဂဏန်း" ပုံစံသို့ ပြောင်းခြင်း
+    function parseTicket(raw) {
+        const text = normalizeDigits(raw)
+            .replace(/[\s\-–—_]+/g, '')
+            .trim();
 
-        // ဝေဝေဆာဆာဆုများ
-        { prize: "ကျပ်(၂)သိန်း ဆု", prefix: "ပ", number: "၃၂၇၀၃" },
-        { prize: "ကျပ်(၂)သိန်း ဆု", prefix: "ဈ", number: "၅၁၁၀၈" },
-        { prize: "ကျပ်(၁)သိန်း ဆု", prefix: "ပ", number: "၅၀၇" }, // ရှေ့ဂဏန်းများအတိုင်း
-        { prize: "ကျပ်(၁)သိန်း ဆု", prefix: "ဆ", number: "၆၄၉" },
-        { prize: "ကျပ်(၅)သောင်း ဆု", prefix: "ဗ", number: "၁၇" },
-        { prize: "ကျပ်(၅)သောင်း ဆု", prefix: "ထ", number: "၂၈" },
-        { prize: "ကျပ်(၁)သောင်း ဆု", prefix: "ဇ", number: "၁" },
-        { prize: "ကျပ်(၁)သောင်း ဆု", prefix: "က", number: "၂" },
-        { prize: "ကျပ်(၁)သောင်း ဆု", prefix: "အ", number: "၄" }
+        const match = text.match(/^([က-အဧဩဪ]+)(\d{1,5})$/);
+        if (!match) return null;
+
+        return {
+            prefix: match[1],
+            number: match[2].padStart(5, '0')
+        };
+    }
+
+    /*
+      ပုံထဲက ထီပေါက်စဉ်စာရင်း
+
+      matchLength
+      5 = အက္ခရာ + ဂဏန်း ၅ လုံး အတိအကျတူရမည်
+      3 = အက္ခရာ + ရှေ့ဂဏန်း ၃ လုံးတူရမည်
+      2 = အက္ခရာ + ရှေ့ဂဏန်း ၂ လုံးတူရမည်
+      1 = အက္ခရာ + ရှေ့ဂဏန်း ၁ လုံးတူရမည်
+    */
+    const winningData = [
+        { prize: "ကျပ်သိန်း (၅၀၀) ဆု", prefix:"ည", number:"၅၅၅၆၀", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၂၀၀) ဆု", prefix:"ပ", number:"၄၄၃၃၆", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၂၀၀) ဆု", prefix:"ဈ", number:"၈၁၂၂၉", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၁၀၀) ဆု", prefix:"ယ", number:"၉၃၈၈၃", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၁၀၀) ဆု", prefix:"ရ", number:"၆၆၇၆၃", matchLength:5 },
+
+        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"ဇ", number:"၁၂၈၈၄", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"ဒ", number:"၁၅၃၃၈", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"ဆ", number:"၁၈၂၄၁", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"ဂ", number:"၂၄၈၄၉", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"ဒ", number:"၃၄၄၇၃", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၅၀) ဆု", prefix:"လ", number:"၈၅၃၂၈", matchLength:5 },
+
+        { prize: "ကျပ်သိန်း (၂၀) ဆု", prefix:"ဘ", number:"၂၀၁၁၃", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၂၀) ဆု", prefix:"ဘ", number:"၂၅၁၅၆", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၂၀) ဆု", prefix:"ယ", number:"၃၆၉၄၅", matchLength:5 },
+
+        { prize: "ကျပ်သိန်း (၁၀) ဆု", prefix:"ရ", number:"၂၄၄၆၇", matchLength:5 },
+        { prize: "ကျပ်သိန်း (၁၀) ဆု", prefix:"ခ", number:"၂၉၀၅၃", matchLength:5 },
+
+        // ဝေဝေဆာဆာဆု
+        { prize: "ကျပ် (၂) သိန်း ဆု", prefix:"ပ", number:"၃၂၇၀၃", matchLength:5 },
+        { prize: "ကျပ် (၂) သိန်း ဆု", prefix:"ဈ", number:"၅၁၁၀၈", matchLength:5 },
+
+        { prize: "ကျပ် (၁) သိန်း ဆု", prefix:"ပ", number:"၅၀၇", matchLength:3 },
+        { prize: "ကျပ် (၁) သိန်း ဆု", prefix:"ဆ", number:"၆၄၉", matchLength:3 },
+
+        { prize: "ကျပ် (၅) သောင်း ဆု", prefix:"ဗ", number:"၁၇", matchLength:2 },
+        { prize: "ကျပ် (၅) သောင်း ဆု", prefix:"ထ", number:"၂၈", matchLength:2 },
+
+        { prize: "ကျပ် (၁) သောင်း ဆု", prefix:"ဇ", number:"၁", matchLength:1 },
+        { prize: "ကျပ် (၁) သောင်း ဆု", prefix:"က", number:"၂", matchLength:1 },
+        { prize: "ကျပ် (၁) သောင်း ဆု", prefix:"အ", number:"၄", matchLength:1 }
     ];
 
-    function checkLottery() {
-        const prefix = document.getElementById("prefix").value;
-        let number = document.getElementById("ticketNumber").value.trim();
-        const resultBox = document.getElementById("resultBox");
+    const priority = {5: 4, 3: 3, 2: 2, 1: 1};
 
-        if (!number) {
-            alert("ကျေးဇူးပြု၍ ထီနံပါတ် ရိုက်ထည့်ပါ။");
+    function checkLottery() {
+        const raw = document.getElementById("ticket").value;
+        const resultBox = document.getElementById("resultBox");
+        const ticket = parseTicket(raw);
+
+        if (!ticket || ticket.number.length !== 5) {
+            resultBox.style.display = "block";
+            resultBox.className = "result lose";
+            resultBox.innerHTML = "ထီလက်မှတ်ပုံစံ မှားနေပါတယ်။<div class='small'>ဥပမာ — <strong>က ၁၂၃၄၅</strong> လို့ ရိုက်ထည့်ပါ။</div>";
             return;
         }
 
-        // ဂဏန်းများကို ပုံစံတူအောင် ညှိခြင်း
-        const searchKey = prefix + "-" + number;
-        let isWon = false;
-        let wonPrize = "";
+        const candidates = winningData.filter(item => {
+            if (item.prefix !== ticket.prefix) return false;
 
-        // ပေါက်မဲ စစ်ဆေးခြင်း
-        for (let item of winningData) {
-            if (item.prefix === prefix && item.number === number) {
-                isWon = true;
-                wonPrize = item.prize;
-                break;
-            }
-        }
+            const winNumber = normalizeDigits(item.number);
+            return ticket.number.slice(0, item.matchLength) ===
+                   winNumber.padStart(item.matchLength, '0').slice(0, item.matchLength);
+        }).sort((a,b) => priority[b.matchLength] - priority[a.matchLength]);
 
         resultBox.style.display = "block";
-        if (isWon) {
+
+        if (candidates.length) {
+            const win = candidates[0];
+            const matchedPart = ticket.prefix + " " + ticket.number.slice(0, win.matchLength);
             resultBox.className = "result win";
-            resultBox.innerHTML = `ဂုဏ်ယူပါတယ်။ <br> ထီလက်မှတ် <strong>${prefix}-${number}</strong> သည် <strong>${wonPrize}</strong> ပေါက်ပါသည်။`;
+            resultBox.innerHTML =
+                "🎉 <strong>ဂုဏ်ယူပါတယ်!</strong><br>" +
+                "ထီလက်မှတ် <strong>" + ticket.prefix + " " + ticket.number + "</strong> သည်<br>" +
+                "<span class='prize'><strong>" + win.prize + "</strong></span> ပေါက်ပါသည်။" +
+                "<div class='small'>ကိုက်ညီသည့်အပိုင်း — <strong>" + matchedPart + "</strong></div>";
         } else {
             resultBox.className = "result lose";
-            resultBox.innerHTML = `စိတ်မကောင်းပါ။ <br> ထီလက်မှတ် <strong>${prefix}-${number}</strong> သည် ဆုမဲပေါက်ခြင်း မရှိပါ။`;
+            resultBox.innerHTML =
+                "😔 ထီလက်မှတ် <strong>" + ticket.prefix + " " + ticket.number +
+                "</strong> သည် ဆုမပေါက်ပါ။";
         }
     }
 </script>
-
 </body>
 </html>
